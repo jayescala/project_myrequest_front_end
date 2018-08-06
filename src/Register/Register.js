@@ -10,8 +10,8 @@ class Register extends Component {
   }
   handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(this.state);
-    const loginResponse = await fetch("http://localhost:9000/user/login", {
+
+    const registerResponse = await fetch("http://localhost:9000/user/register", {
       method: "post",
       credentials: "include",
       body: JSON.stringify(this.state),
@@ -20,17 +20,16 @@ class Register extends Component {
         }
     });
 
-    const parsedResponse = await loginResponse.json();
+    const parsedResponse = await registerResponse.json();
     console.log(parsedResponse);
-    if(parsedResponse.data === "login successful"){
+    if(parsedResponse.data === "registration successful"){
       this.props.history.push("/home");
     }
 
   }
   handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+    console.log(event);
+    this.setState({[event.target.name]: event.target.value});
   }
   render(){
     return (
@@ -53,23 +52,3 @@ class Register extends Component {
 }
 
 export default Register;
-
-// User Login //
-router.post("/login", async (req, res) => {
-  Users.findOne({username: req.body.username}, (err, loginUsername) => {
-    if(loginUsername){
-      if(bcrypt.compareSync(req.body.password, loginUsername.password)){
-        req.session.username = req.body.username;
-        req.session.loggedIn = true;
-        req.session.message = "You are already logged in.";
-        res.redirect("/");
-      } else {
-        req.session.message = "The password you have entered is incorrect.";
-        res.redirect("/user/create");
-      }
-    } else {
-      req.session.message = "The username you had entered does not match any existing accounts.";
-      res.redirect("/user/create");
-    }
-  });
-});

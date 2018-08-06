@@ -15,20 +15,20 @@ class HomeContainer extends React.Component {
       description: ""
     }
   }
-  getMovies = async () => {
+  getRooms = async () => {
     try {
-      const data = await fetch("http://localhost:9000/api/v1/movies");
-      const movies = data.json();
-      return movies;
+      const data = await fetch("http://localhost:9000/api/v1/rooms");
+      const rooms = data.json();
+      return rooms;
     } catch(err) {
       console.log(err);
       return err;
     }
   }
   componentDidMount(){
-    this.getMovies().then((res) => {
+    this.getRooms().then((res) => {
       this.setState({
-        movies: res.data
+        rooms: res.data
       });
     });
   }
@@ -36,7 +36,6 @@ class HomeContainer extends React.Component {
     return(
       <div>
         <h1>HOME CONTAINER</h1>
-        <MovieForm addMovie={this.addMovie}/>
       </div>
     )
   }
