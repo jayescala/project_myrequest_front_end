@@ -17,10 +17,10 @@ class CreateRoom extends Component {
     }
   }
 
-handleChange = (e) => {
-  console.log(this.state);
-  this.setState({[e.currentTarget.name]: e.currentTarget.value});
-}
+  handleChange = (e) => {
+    console.log(this.state);
+    this.setState({[e.currentTarget.name]: e.currentTarget.value});
+  }
 
   render() {
     console.log(this.props, 'this is props');
@@ -43,4 +43,4 @@ handleChange = (e) => {
 }
 
 
-  export default CreateRoom;
+export default CreateRoom;
