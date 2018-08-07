@@ -16,7 +16,7 @@ class Room extends Component {
       image: ''
     }
   }
-}
+
 
 componentDidMount() {
   this.getRoom().then((Room) => {
@@ -82,6 +82,7 @@ addRoom = async (room, e) => {
       </div>
     )
   }
+}
 
 
   export default Room;
