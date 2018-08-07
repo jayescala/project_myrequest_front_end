@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import CreateRoom from '../CreateRoom';
+import CreateRoom from '../CreateRoom/CreateRoom.js';
 
 class Room extends Component {
   constructor() {
@@ -16,47 +16,46 @@ class Room extends Component {
       image: ''
     }
   }
-}
 
-componentDidMount() {
-  this.getRoom().then((Room) => {
-    this.setState({
-      Room: Room.data
+  componentDidMount() {
+    this.getRoom().then((Room) => {
+      this.setState({
+        Room: Room.data
+      });
+    }).catch((err) => {
+      console.log(err, 'this is an error in the componentDidMount');
     });
-  }).catch((err) => {
-    console.log(err, 'this is an error in the componentDidMount');
-  });
-}
-
-getRoom = async () => {
-  const room = await fetch('http://localhost:9000/api/v1/rooms', {
-    credentials: 'include',
-    method: 'GET'
-  });
-
-  const parsedRoom = Room.json();
-  return parsedRoom
-}
-
-addRoom = async (room, e) => {
-  e.preventDefault();
-  try {
-    const createRoom = await fetch('http://localhost:9000/api/v1/rooms', {
-      method: 'POST',
-      credentials: 'include',
-      body: JSON.stringify(room),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-
-    const parsedResponse = await createRoom.json();
-
-    this.state({room: [...this.state.room, parsedResponse.data]})
-  } catch(err) {
-    console.log(err)
   }
-}
+
+  getRoom = async () => {
+    const room = await fetch('http://localhost:9000/api/v1/rooms', {
+      credentials: 'include',
+      method: 'GET'
+    });
+
+    const parsedRoom = Room.json();
+    return parsedRoom
+  }
+
+  addRoom = async (room, e) => {
+    e.preventDefault();
+    try {
+      const createRoom = await fetch('http://localhost:9000/api/v1/rooms', {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify(room),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const parsedResponse = await createRoom.json();
+
+      this.state({room: [...this.state.room, parsedResponse.data]})
+    } catch(err) {
+      console.log(err)
+    }
+  }
 
   deleteRoom = async (id, e) => {
     e.preventDefault();
@@ -82,6 +81,7 @@ addRoom = async (room, e) => {
       </div>
     )
   }
+}
 
 
   export default Room;
