@@ -15,6 +15,7 @@ class Room extends Component {
       description: '',
       image: ''
     }
+  }
 
 
   componentDidMount() {
