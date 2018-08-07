@@ -1,19 +1,19 @@
-import React, {Component} from 'react'; 
-import CreateRoom from '../CreateRoom'; 
+import React, {Component} from 'react';
+import CreateRoom from '../CreateRoom';
 
 class Room extends Component {
   constructor() {
-    super(); 
+    super();
     this.state = {
-      code: '', 
-      createdByUsername: '', 
-      createdByUserId: '', 
-      comments: '', 
-      pendingRequest: '', 
-      approvedRequest: '', 
-      roomName: '', 
+      code: '',
+      createdByUsername: '',
+      createdByUserId: '',
+      comments: '',
+      pendingRequest: '',
+      approvedRequest: '',
+      roomName: '',
       description: '',
-      image: ''     
+      image: ''
     }
   }
 }
@@ -22,7 +22,7 @@ componentDidMount() {
   this.getRoom().then((Room) => {
     this.setState({
       Room: Room.data
-    }); 
+    });
   }).catch((err) => {
     console.log(err, 'this is an error in the componentDidMount');
   });
@@ -32,7 +32,7 @@ getRoom = async () => {
   const room = await fetch('http://localhost:9000/api/v1/rooms', {
     credentials: 'include',
     method: 'GET'
-  });  
+  });
 
   const parsedRoom = Room.json();
   return parsedRoom
@@ -71,9 +71,7 @@ addRoom = async (room, e) => {
 
     } catch(err) {
       console.log(err);
-
     }
-  
   }
 
   render() {
