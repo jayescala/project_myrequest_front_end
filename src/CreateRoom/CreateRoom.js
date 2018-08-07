@@ -16,17 +16,25 @@ class CreateRoom extends Component {
       image: ''
     }
   }
-}
-
   render() {
     console.log(this.props, 'this is props');
     return (
 
       <form onSubmit={this.props.addRoom.bind(this, this.state)}>
-       <input type="submit" />
+        <label>
+          Room Name: <input type="text" name="roomName" onChange={this.handleChange}/>
+        </label><br/>
+        <label>
+          Description: <input type="text" name="description" onChange={this.handleChange}/>
+        </label><br/>
+        <label>
+          Image: <input type="text" name="image" onChange={this.handleChange}/>
+        </label><br/>
+        <input type="submit" value="Create Room"/>
       </form>
     )
   }
+}
 
 
   export default CreateRoom;
