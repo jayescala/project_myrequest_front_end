@@ -1,6 +1,6 @@
 import React from "react";
 
-class HomeContainer extends React.Component {
+class MainContainer extends React.Component {
   constructor(){
     super();
     this.state = {
@@ -35,10 +35,10 @@ class HomeContainer extends React.Component {
   render(){
     return(
       <div>
-        <h1>HOME CONTAINER</h1>
+        <h1>MAIN CONTAINER</h1>
       </div>
     )
   }
 }
 
-export default HomeContainer;
+export default MainContainer;

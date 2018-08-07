@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Login extends Component {
+class Register extends Component {
   constructor(){
     super();
     this.state = {
@@ -10,7 +10,8 @@ class Login extends Component {
   }
   handleSubmit = async (event) => {
     event.preventDefault();
-    const loginResponse = await fetch("http://localhost:9000/user/login", {
+    console.log(this.state);
+    const registerResponse = await fetch("http://localhost:9000/user/register", {
       method: "post",
       credentials: "include",
       body: JSON.stringify(this.state),
@@ -18,11 +19,11 @@ class Login extends Component {
         "Content-Type": "application/json"
         }
     });
-
-    const parsedResponse = await loginResponse.json();
-    if(parsedResponse.data === "login successful"){
+    const parsedResponse = await registerResponse.json();
+    if(parsedResponse.data === "registration successful"){
       this.props.history.push("/home");
     }
+
   }
   handleChange = (event) => {
     this.setState({
@@ -32,7 +33,7 @@ class Login extends Component {
   render(){
     return (
       <div>
-        <h1>LOGIN</h1>
+        <h1>REGISTER</h1>
         <form onSubmit={this.handleSubmit}>
           <label>
             Username:
@@ -42,11 +43,11 @@ class Login extends Component {
             Password:
             <input type="password" name="password" onChange={this.handleChange}/>
           </label><br/>
-          <input type="submit" value="Login"/>
+          <input type="submit" value="Register"/>
         </form>
       </div>
     )
   }
 }
 
-export default Login;
+export default Register;

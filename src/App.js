@@ -1,8 +1,10 @@
 import React from "react";
 import "./App.css";
-// import MovieContainer from "./MovieContainer/MovieContainer.js";
+import MainContainer from "./MainContainer/MainContainer.js";
+import HomeContainer from "./HomeContainer/HomeContainer.js";
+import Register from "./Register/Register.js";
 import Login from "./Login/Login.js";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 
 const My404 = () => {
   return (
@@ -17,9 +19,13 @@ const App = () => {
   return (
     <main>
       <div>
+        <Link to="/user/register">Register</Link>
+        <Link to="/user/login">Login</Link>
         <Switch>
-          <Route exact path="/" component= { Login }/>
-          {/* <Route exact path="/movies" component={ MovieContainer }/> */}
+          <Route exact path="/" component= { MainContainer }/>
+          <Route exact path="/user/register" component= { Register }/>
+          <Route exact path="/user/login" component= { Login }/>
+          <Route exact path="/home" component={ HomeContainer }/>
           <Route component= { My404 }/>
         </Switch>
       </div>
