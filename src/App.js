@@ -4,6 +4,7 @@ import MainContainer from "./MainContainer/MainContainer.js";
 import HomeContainer from "./HomeContainer/HomeContainer.js";
 import Register from "./Register/Register.js";
 import Login from "./Login/Login.js";
+import Room from "./RoomContainer/Room.js";
 import { Route, Switch, Link } from "react-router-dom";
 
 const My404 = () => {
@@ -26,6 +27,7 @@ const App = () => {
           <Route exact path="/user/register" component= { Register }/>
           <Route exact path="/user/login" component= { Login }/>
           <Route exact path="/home" component={ HomeContainer }/>
+          <Route path="/room/:code" component={ Room }/>
           <Route component= { My404 }/>
         </Switch>
       </div>

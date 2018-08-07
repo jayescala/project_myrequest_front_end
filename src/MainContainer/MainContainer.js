@@ -36,6 +36,12 @@ class MainContainer extends React.Component {
     return(
       <div>
         <h1>MAIN CONTAINER</h1>
+        <form>
+          <label>
+            Room Code: <input type="text" name="code"/>
+          </label>
+          <input type="submit" value="Enter Room"/>
+        </form>
       </div>
     )
   }
