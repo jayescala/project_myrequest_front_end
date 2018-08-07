@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Register extends Component {
+class Login extends Component {
   constructor(){
     super();
     this.state = {
@@ -10,7 +10,6 @@ class Register extends Component {
   }
   handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(this.state);
     const loginResponse = await fetch("http://localhost:9000/user/login", {
       method: "post",
       credentials: "include",
@@ -21,11 +20,9 @@ class Register extends Component {
     });
 
     const parsedResponse = await loginResponse.json();
-    console.log(parsedResponse);
     if(parsedResponse.data === "login successful"){
       this.props.history.push("/home");
     }
-
   }
   handleChange = (event) => {
     this.setState({
@@ -35,7 +32,7 @@ class Register extends Component {
   render(){
     return (
       <div>
-        <h1>REGISTER</h1>
+        <h1>LOGIN</h1>
         <form onSubmit={this.handleSubmit}>
           <label>
             Username:
@@ -45,31 +42,11 @@ class Register extends Component {
             Password:
             <input type="password" name="password" onChange={this.handleChange}/>
           </label><br/>
-          <input type="submit" value="Register"/>
+          <input type="submit" value="Login"/>
         </form>
       </div>
     )
   }
 }
 
-export default Register;
-
-// User Login //
-router.post("/login", async (req, res) => {
-  Users.findOne({username: req.body.username}, (err, loginUsername) => {
-    if(loginUsername){
-      if(bcrypt.compareSync(req.body.password, loginUsername.password)){
-        req.session.username = req.body.username;
-        req.session.loggedIn = true;
-        req.session.message = "You are already logged in.";
-        res.redirect("/");
-      } else {
-        req.session.message = "The password you have entered is incorrect.";
-        res.redirect("/user/create");
-      }
-    } else {
-      req.session.message = "The username you had entered does not match any existing accounts.";
-      res.redirect("/user/create");
-    }
-  });
-});
+export default Login;

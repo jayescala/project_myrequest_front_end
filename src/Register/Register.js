@@ -10,7 +10,7 @@ class Register extends Component {
   }
   handleSubmit = async (event) => {
     event.preventDefault();
-
+    console.log(this.state);
     const registerResponse = await fetch("http://localhost:9000/user/register", {
       method: "post",
       credentials: "include",
@@ -19,17 +19,16 @@ class Register extends Component {
         "Content-Type": "application/json"
         }
     });
-
     const parsedResponse = await registerResponse.json();
-    console.log(parsedResponse);
     if(parsedResponse.data === "registration successful"){
       this.props.history.push("/home");
     }
 
   }
   handleChange = (event) => {
-    console.log(event);
-    this.setState({[event.target.name]: event.target.value});
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   }
   render(){
     return (
