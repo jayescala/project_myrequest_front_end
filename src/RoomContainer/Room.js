@@ -15,7 +15,7 @@ class Room extends Component {
       description: '',
       image: ''
     }
-  }
+
 
   componentDidMount() {
     this.getRoom().then((Room) => {
