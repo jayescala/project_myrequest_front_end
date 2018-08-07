@@ -16,6 +16,11 @@ class CreateRoom extends Component {
       image: ''
     }
   }
+
+handleChange = (e) => {
+  this.setState({[e.currentTarget.name]: e.currentTarget.value});
+}
+
   render() {
     console.log(this.props, 'this is props');
     return (

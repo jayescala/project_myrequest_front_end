@@ -16,6 +16,7 @@ class Room extends Component {
       image: ''
     }
   }
+
   componentDidMount() {
     this.getRoom().then((Room) => {
       this.setState({
