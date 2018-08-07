@@ -27,7 +27,6 @@ class HomeContainer extends React.Component {
   }
   addRoom = async (room, event) => {
   event.preventDefault();
-  console.log(room);
   try {
     const createdRoom = await fetch("http://localhost:9000/api/v1/rooms", {
       method: "post",
@@ -37,7 +36,9 @@ class HomeContainer extends React.Component {
       }
     });
     const parsedResponse = await createdRoom.json();
+    console.log(room);
     this.state = room;
+    console.log(room);
     this.props.history.push("/room/" + this.state.code);
   } catch(err) {
     console.log(err);

@@ -5,7 +5,7 @@ class CreateRoom extends Component {
   constructor() {
     super();
     this.state = {
-      code: '',
+      code: '1234',
       createdByUsername: '',
       createdByUserId: '',
       comments: '',
@@ -18,6 +18,7 @@ class CreateRoom extends Component {
   }
 
 handleChange = (e) => {
+  console.log(this.state);
   this.setState({[e.currentTarget.name]: e.currentTarget.value});
 }
 
