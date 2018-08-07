@@ -26,24 +26,24 @@ class HomeContainer extends React.Component {
     });
   }
   addRoom = async (room, event) => {
-  event.preventDefault();
-  try {
-    const createdRoom = await fetch("http://localhost:9000/api/v1/rooms", {
-      method: "post",
-      body: JSON.stringify(room),
-      headers: {
-        "content-type": "application/json"
-      }
-    });
-    const parsedResponse = await createdRoom.json();
-    console.log(room);
-    this.state = room;
-    console.log(room);
-    this.props.history.push("/room/" + this.state.code);
-  } catch(err) {
-    console.log(err);
+    event.preventDefault();
+    try {
+      const createdRoom = await fetch("http://localhost:9000/api/v1/rooms", {
+        method: "post",
+        body: JSON.stringify(room),
+        headers: {
+          "content-type": "application/json"
+        }
+      });
+      const parsedResponse = await createdRoom.json();
+      console.log(room);
+      this.state = room;
+      console.log(room);
+      this.props.history.push("/room/" + this.state.code);
+    } catch(err) {
+      console.log(err);
+    }
   }
-}
   render(){
     return(
       <div>

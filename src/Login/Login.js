@@ -20,7 +20,7 @@ class Login extends Component {
     });
 
     const parsedResponse = await loginResponse.json();
-    if(parsedResponse.data === "login successful"){
+    if(parsedResponse.data.loggedIn === true){
       this.props.history.push("/home");
     }
   }
