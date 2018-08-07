@@ -20,7 +20,8 @@ class Register extends Component {
         }
     });
     const parsedResponse = await registerResponse.json();
-    if(parsedResponse.data === "registration successful"){
+    console.log(parsedResponse.data);
+    if(parsedResponse.data.loggedIn === true){
       this.props.history.push("/home");
     }
 

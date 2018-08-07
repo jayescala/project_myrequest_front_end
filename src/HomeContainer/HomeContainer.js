@@ -1,18 +1,11 @@
 import React from "react";
+import CreateRoom from "../CreateRoom/CreateRoom.js";
 
 class HomeContainer extends React.Component {
   constructor(){
     super();
     this.state = {
-      movies: [],
-      showEdit: false,
-      editMovieId: null,
-      movieToEdit: {
-        title: "",
-        description: ""
-      },
-      title: "",
-      description: ""
+
     }
   }
   // getRooms = async () => {
@@ -36,6 +29,7 @@ class HomeContainer extends React.Component {
     return(
       <div>
         <h1>HOME CONTAINER</h1>
+        <CreateRoom/>
       </div>
     )
   }
