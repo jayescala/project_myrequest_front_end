@@ -1,4 +1,8 @@
 import React, {Component} from 'react';
+<<<<<<< HEAD
+=======
+import RoomContainer from '../RoomContainer/Room.js'; 
+>>>>>>> c17f2ef378104fd0bb6c03bcd4e0078b648ad610
 
 class CreateRoom extends Component {
   constructor() {
