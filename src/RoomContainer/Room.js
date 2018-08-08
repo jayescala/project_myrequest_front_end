@@ -34,12 +34,20 @@ class Room extends Component {
       method: 'GET'
     });
 
-    const parsedRoom = Room.json();
+    const parsedRoom = room.json();
+    console.log(parsedRoom);
     return parsedRoom
   }
 
   getCode = () => {
-    const code = this.location.pathName
+
+    const pathName = this.props.location.pathname;
+
+    const pathNameArray = pathName.split("/");
+
+    const roomCode = pathNameArray[pathNameArray.length - 1]
+
+    return roomCode;
   }
 
 
@@ -80,9 +88,10 @@ class Room extends Component {
   }
 
   render() {
+    console.log('state in room----->', this.state);
     return (
       <div>
-        <h1></h1>
+        <h1>This is the room</h1>
       </div>
     )
   }
