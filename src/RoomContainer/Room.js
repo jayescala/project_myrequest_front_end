@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import CreateRoom from '../CreateRoom/CreateRoom.js';
+import queryString from 'query-string';
 
 class Room extends Component {
   constructor() {
@@ -18,6 +19,17 @@ class Room extends Component {
   }
 
   componentDidMount() {
+    console.log(window.location);
+    console.log(queryString);
+    const parsed = queryString.parse(window.location.search);
+    console.log(parsed)
+    const accessToken = parsed.access_token;
+
+    fetch("http://api.spotify.com/v1/me", {
+      headers: {'Authorization': 'Bearer ' + accessToken}
+    }).then(response => response.json()).then(data => console.log(data))
+
+
     this.getRoom().then((Room) => {
       this.setState({
         Room: Room.data
@@ -88,7 +100,6 @@ class Room extends Component {
   }
 
   render() {
-    console.log('state in room----->', this.state);
     return (
       <div>
         <h1>This is the room</h1>
