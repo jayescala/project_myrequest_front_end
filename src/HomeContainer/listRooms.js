@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import HomeContainer from '../HomeContainer/HomeContainer.js'
+import HomeContainer from '../HomeContainer/HomeContainer.js';
+import RoomContainer from '../RoomContainer/Room.js';
 
 
 class listRooms extends Component {
@@ -13,7 +14,7 @@ class listRooms extends Component {
   }
 
   componentDidMount() {
-    this.getRoom().then((listRooms) => {
+    this.getRooms().then((listRooms) => {
       this.setState({
         listRooms: listRooms.data
       });
@@ -26,7 +27,7 @@ class listRooms extends Component {
     return parsedRoom;
   }
 
-  roomslist = async () => {
+  getRooms = async () => {
     const roomCode = this.getCode()
     const room = await fetch('http://localhost:9000/api/v1/rooms/', roomCode {
       credentials: 'include',
