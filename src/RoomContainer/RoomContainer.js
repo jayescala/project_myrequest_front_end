@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import CreateRoom from '../CreateRoom/CreateRoom.js';
+import Search from "./Search/Search.js";
+import Chat from "./Chat/Chat.js";
 
 class Room extends Component {
   constructor() {
@@ -13,23 +14,13 @@ class Room extends Component {
       approvedRequest: '',
       roomName: '',
       description: '',
-      image: ''
+      image: '',
+      tracks: []
     }
   }
-
-  componentDidMount() {
-    this.getRoom().then((Room) => {
-      this.setState({
-        Room: Room.data
-      });
-    }).catch((err) => {
-      console.log(err, 'this is an error in the componentDidMount');
-    });
-  }
-
   getRoom = async () => {
     const roomCode = this.getCode();
-    const room = await fetch('http://localhost:9000/api/v1/rooms/' + roomCode, {
+    const room = await fetch('http://localhost:9000/rooms/' + roomCode, {
       credentials: 'include',
       method: 'GET'
     });
@@ -38,6 +29,11 @@ class Room extends Component {
     console.log(parsedRoom);
     return parsedRoom
   }
+
+  // addTracks = async (track, event) => {
+  //   this.state.tracks.push(track);
+  //   console.log(this.state.tracks);
+  // }
 
   getCode = () => {
 
@@ -50,32 +46,11 @@ class Room extends Component {
     return roomCode;
   }
 
-
-  addRoom = async (room, e) => {
-    e.preventDefault();
-    try {
-      const createRoom = await fetch('http://localhost:9000/api/v1/rooms', {
-        method: 'POST',
-        credentials: 'include',
-        body: JSON.stringify(room),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
-      const parsedResponse = await createRoom.json();
-
-      this.state({room: [...this.state.room, parsedResponse.data]})
-    } catch(err) {
-      console.log(err)
-    }
-  }
-
   deleteRoom = async (id, e) => {
     e.preventDefault();
     console.log('deleteRoom function is being called, this is the id:', id);
     try {
-      const deleteRoom = await fetch('http://localhost:9000/api/v1/room/' + id, {
+      const deleteRoom = await fetch('http://localhost:9000/room/' + id, {
         method: 'DELETE'
       });
 
@@ -88,10 +63,20 @@ class Room extends Component {
   }
 
   render() {
-    console.log('state in room----->', this.state);
     return (
       <div>
-        <h1>This is the room</h1>
+        <h1>Room: {this.state.code}</h1>
+        <div id="home-container">
+          <div id="search-component" className="home-column">
+            <Search addTracks={this.addTracks}/>
+          </div>
+          <div id="playlist-component" className="home-column">
+            <h3>Playlist</h3>
+          </div>
+          <div id="chat-component" className="home-column">
+            <Chat />
+          </div>
+        </div>
       </div>
     )
   }

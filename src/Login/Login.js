@@ -21,7 +21,9 @@ class Login extends Component {
 
     const parsedResponse = await loginResponse.json();
     if(parsedResponse.data.loggedIn === true){
-      this.props.history.push("/home");
+      this.props.history.push("/home", {
+        username: this.state.username
+      });
     }
   }
   handleChange = (event) => {
@@ -31,18 +33,12 @@ class Login extends Component {
   }
   render(){
     return (
-      <div>
-        <h1>LOGIN</h1>
+      <div id="login-container">
+        <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Username:
-            <input type="text" name="username" onChange={this.handleChange}/>
-          </label><br/>
-          <label>
-            Password:
-            <input type="password" name="password" onChange={this.handleChange}/>
-          </label><br/>
-          <input type="submit" value="Login"/>
+          <input type="text" name="username" onChange={this.handleChange} placeholder="username"/>
+          <input type="password" name="password" onChange={this.handleChange} placeholder="password"/>
+          <button type="submit">Enter</button>
         </form>
       </div>
     )

@@ -10,7 +10,6 @@ class Register extends Component {
   }
   handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(this.state);
     const registerResponse = await fetch("http://localhost:9000/user/register", {
       method: "post",
       credentials: "include",
@@ -20,11 +19,13 @@ class Register extends Component {
         }
     });
     const parsedResponse = await registerResponse.json();
+    console.log(parsedResponse);
     console.log(parsedResponse.data.loggedIn);
     if(parsedResponse.data.loggedIn === true){
-      this.props.history.push("/home");
+      this.props.history.push("/home", {
+        username: this.state.username
+      });
     }
-
   }
   handleChange = (event) => {
     this.setState({
@@ -33,18 +34,12 @@ class Register extends Component {
   }
   render(){
     return (
-      <div>
-        <h1>REGISTER</h1>
+      <div id="register-container">
+        <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Username:
-            <input type="text" name="username" onChange={this.handleChange}/>
-          </label><br/>
-          <label>
-            Password:
-            <input type="password" name="password" onChange={this.handleChange}/>
-          </label><br/>
-          <input type="submit" value="Register"/>
+          <input type="text" name="username" onChange={this.handleChange} placeholder="username"/>
+          <input type="password" name="password" onChange={this.handleChange} placeholder="password"/>
+          <button type="submit">Enter</button>
         </form>
       </div>
     )
