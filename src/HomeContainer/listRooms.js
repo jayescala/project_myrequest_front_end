@@ -3,48 +3,64 @@ import HomeContainer from '../HomeContainer/HomeContainer.js';
 import RoomContainer from '../RoomContainer/Room.js';
 
 
-class listRooms extends Component {
+class ListRooms extends Component {
   constructor() {
     super();
     this.state = {
       code: '',
       roomName: '',
-      description: ''
+      description: '',
+      listRooms: []
     }
   }
 
   componentDidMount() {
+    console.log("mounted");
     this.getRooms().then((listRooms) => {
       this.setState({
         listRooms: listRooms.data
       });
+      console.log(this.state.listRooms);
     }).catch((err) => {
       console.log(err, 'this is an error in the componentDidMount');
     });
 
-    const parsedRoom = listRooms.json();
+
+  }
+
+  getRooms = async () => {
+    const rooms = await fetch('http://localhost:9000/api/v1/rooms', {
+      credentials: 'include',
+      method: 'GET'
+    });
+    console.log(rooms);
+
+    const parsedRoom = rooms.json();
     console.log(parsedRoom);
     return parsedRoom;
   }
 
-  getRooms = async () => {
-    const roomCode = this.getCode()
-    const room = await fetch('http://localhost:9000/api/v1/rooms/', roomCode {
-      credentials: 'include',
-      method: 'GET'
+  roomsList = () => {
+    const roomsList = this.state.listRooms.map((room, i) => {
+      return  <li key={room._id}>
+                <p>{room.code}</p>
+                <p>{room.description}</p>
+              </li>
     });
+    return roomsList;
+    console.log(roomsList);
   }
 
   render() {
     return(
       <div>
-        <h3>{this.code}</h3>
-        <h3>{this.roomName}</h3>
-        <h3>{this.description}</h3>
+        <ul>
+          {this.roomsList()}
+        </ul>
       </div>
 
     )
   }
 };
 
-export default Rooms;
+export default ListRooms;

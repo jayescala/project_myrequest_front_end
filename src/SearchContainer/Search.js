@@ -6,51 +6,69 @@ class Search extends Component {
   constructor() {
     super();
     this.state = {
-      query: ''
+      query: '',
+      results: ''
     }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    this.getQuery().then((data) => {
-      this.setState({
-        query: data
-      });
-    }).catch((err) => {
-      console.log(err, 'this is an error in the componentDidMount');
-    });
-  }
+  // componentDidMount() {
+  //   this.getQuery().then((data) => {
+  //     console.log(data, "Data");
+  //     this.setState({
+  //       results: data
+  //     });
+  //   }).catch((err) => {
+  //     console.log(err, 'this is an error in the componentDidMount');
+  //   });
+  // }
 
   getQuery = async () => {
-    const searchInfo = this.state.query();
-    const Search = await fetch('http://localhost:9000/api/v1/search/' + searchInfo, {
+    const searchInfo = this.state.query;
+    console.log(searchInfo, "searchInfo");
+    const Search = await fetch('http://localhost:9000/search/' + searchInfo, {
       credentials: 'include',
       method: 'GET'
     });
 
-    const parsedSearch = Search.json();
-    console.log(parsedSearch);
+    console.log(Search.body, "Search");
+    const parsedSearch = await Search.json();
+    console.log(parsedSearch, "Parsed Search");
+
+    this.setState({
+      results: parsedSearch
+    })
+
     return parsedSearch;
   }
 
-  handleInputChange = (event) => {
-    this.setState({
-      [event.currentTarget.name]: event.currentTarget.value
-    });
-  };
+  // handleInputChange = async (event) => {
+  //   await this.setState({
+  //     [event.currentTarget.name]: event.currentTarget.value
+  //   });
+  //   this.getQuery();
+  // };
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+
+  handleSubmit(event) {
+    alert('An artist was submitted: ' + this.state.query);
+    event.preventDefault();
+  }
 
 
   render() {
-    // <h1/> is a placeholder, we want artist/track names to render from Spotify
     return(
-      <form>
-        <input
-          placeholder='search for...'
-          name='query'
-          ref={input => this.search = input}
-          onChange={this.handleInputChange}
-        />
-        <p>{this.state.query}</p>
-        <Suggestions results={this.state.query}/>
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          <input type="text" value={this.state.query} onChange={this.handleChange} placeholder="serch for..." name="query"/>
+          <input type="submit" value="submit"/>
+          <p>{this.state.query}</p>
+        </label>
       </form>
     )
   }

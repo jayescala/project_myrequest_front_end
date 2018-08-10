@@ -1,5 +1,7 @@
 import React from "react";
 import CreateRoom from "../CreateRoom/CreateRoom.js";
+import ListRooms from "./listRooms.js";
+import UserInfo from "./userInfo.js";
 
 class HomeContainer extends React.Component {
   constructor(){
@@ -44,11 +46,15 @@ class HomeContainer extends React.Component {
       console.log(err);
     }
   }
+
   render(){
     return(
       <div>
         <h1>HOME CONTAINER</h1>
+        <UserInfo />
         <CreateRoom addRoom={this.addRoom}/>
+        <ListRooms />
+
       </div>
     )
   }

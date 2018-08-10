@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import CreateRoom from '../CreateRoom/CreateRoom.js';
 import queryString from 'query-string';
+import SearchContainer from "../SearchContainer/Search.js";
 
 class Room extends Component {
   constructor() {
@@ -99,10 +100,14 @@ class Room extends Component {
     }
   }
 
+
+
+
   render() {
     return (
       <div>
         <h1>This is the room</h1>
+        <SearchContainer />
       </div>
     )
   }
