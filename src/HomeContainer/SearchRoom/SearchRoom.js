@@ -9,7 +9,7 @@ class SearchRoom extends Component {
   }
   getRooms = async () => {
     try {
-      const data = await fetch("http://localhost:9000/rooms/" + this.state.roomCode);
+      const data = await fetch("https://myrequest-app.herokuapp.com/rooms/" + this.state.roomCode);
       const room = data.json();
       return room;
     } catch(err) {

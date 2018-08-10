@@ -20,7 +20,7 @@ class Room extends Component {
   }
   getRoom = async () => {
     const roomCode = this.getCode();
-    const room = await fetch('http://localhost:9000/rooms/' + roomCode, {
+    const room = await fetch('https://myrequest-app.herokuapp.com/rooms/' + roomCode, {
       credentials: 'include',
       method: 'GET'
     });

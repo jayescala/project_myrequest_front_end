@@ -1,7 +1,5 @@
 import React, {Component} from "react";
 import Suggestions from "./Suggestions/Suggestions.js";
-import socketIOClient from "socket.io-client";
-
 
 class Search extends Component {
   constructor() {
@@ -33,13 +31,11 @@ class Search extends Component {
   addTracks = async (track, event) => {
     this.state.tracks.push(track);
     const approvedPlaylist = this.generateApprovedPlaylist();
-    document.getElementById("approved-requests").innerHTML=approvedPlaylist;
-    console.log(this.state.tracks);
   }
   generateApprovedPlaylist = () => {
     const approvedPlaylist = this.state.tracks.map(result => {
       console.log(result);
-      return  <li>{result.name}</li>
+      return  <li>{result}</li>
     });
     return (
       <ul>
@@ -50,6 +46,7 @@ class Search extends Component {
   render() {
     return (
       <div id="search-component">
+        {this.generateApprovedPlaylist()}
         <h3>Search</h3>
         <form onSubmit={this.handleSubmit}>
           <input type="text" value={this.state.query} onChange={this.handleInputChange} placeholder="search for..." name="query"/>
