@@ -1,15 +1,8 @@
-<<<<<<< HEAD
 import React, { Component } from "react";
 import UserInfo from "./UserInfo/UserInfo.js";
 import RoomList from "./RoomList/RoomList.js";
 import CreateRoom from "./CreateRoom/CreateRoom.js";
 import SearchRoom from "./SearchRoom/SearchRoom.js";
-=======
-import React from "react";
-import CreateRoom from "../CreateRoom/CreateRoom.js";
-import ListRooms from "./listRooms.js";
-import UserInfo from "./userInfo.js";
->>>>>>> 8673ea7e34fbce76699bca494ee30c04c61c88b4
 
 class HomeContainer extends Component {
   constructor(){
@@ -59,7 +52,6 @@ class HomeContainer extends Component {
   render(){
     return(
       <div>
-<<<<<<< HEAD
         <h1>Home</h1>
         <div id="home-container">
           <div id="user-info-component" class="home-column">
@@ -74,13 +66,6 @@ class HomeContainer extends Component {
             <SearchRoom history={this.props.history}/>
           </div>
         </div>
-=======
-        <h1>HOME CONTAINER</h1>
-        <UserInfo />
-        <CreateRoom addRoom={this.addRoom}/>
-        <ListRooms />
-
->>>>>>> 8673ea7e34fbce76699bca494ee30c04c61c88b4
       </div>
     )
   }

@@ -1,12 +1,6 @@
 import React, {Component} from 'react';
-<<<<<<< HEAD:src/RoomContainer/RoomContainer.js
 import Search from "./Search/Search.js";
 import Chat from "./Chat/Chat.js";
-=======
-import CreateRoom from '../CreateRoom/CreateRoom.js';
-import queryString from 'query-string';
-import SearchContainer from "../SearchContainer/Search.js";
->>>>>>> 8673ea7e34fbce76699bca494ee30c04c61c88b4:src/RoomContainer/Room.js
 
 class Room extends Component {
   constructor() {
@@ -24,31 +18,6 @@ class Room extends Component {
       tracks: []
     }
   }
-<<<<<<< HEAD:src/RoomContainer/RoomContainer.js
-=======
-
-  componentDidMount() {
-    console.log(window.location);
-    console.log(queryString);
-    const parsed = queryString.parse(window.location.search);
-    console.log(parsed)
-    const accessToken = parsed.access_token;
-
-    fetch("http://api.spotify.com/v1/me", {
-      headers: {'Authorization': 'Bearer ' + accessToken}
-    }).then(response => response.json()).then(data => console.log(data))
-
-
-    this.getRoom().then((Room) => {
-      this.setState({
-        Room: Room.data
-      });
-    }).catch((err) => {
-      console.log(err, 'this is an error in the componentDidMount');
-    });
-  }
-
->>>>>>> 8673ea7e34fbce76699bca494ee30c04c61c88b4:src/RoomContainer/Room.js
   getRoom = async () => {
     const roomCode = this.getCode();
     const room = await fetch('http://localhost:9000/rooms/' + roomCode, {
@@ -99,7 +68,6 @@ class Room extends Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD:src/RoomContainer/RoomContainer.js
         <h1>Room: {this.state.code}</h1>
         <div id="home-container">
           <div id="search-component" className="home-column">
@@ -112,10 +80,6 @@ class Room extends Component {
             <Chat />
           </div>
         </div>
-=======
-        <h1>This is the room</h1>
-        <SearchContainer />
->>>>>>> 8673ea7e34fbce76699bca494ee30c04c61c88b4:src/RoomContainer/Room.js
       </div>
     )
   }

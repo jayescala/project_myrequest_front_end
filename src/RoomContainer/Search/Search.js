@@ -32,8 +32,20 @@ class Search extends Component {
   }
   addTracks = async (track, event) => {
     this.state.tracks.push(track);
-    document.getElementById("approved-requests").innerHTML=this.state.tracks[1];
+    const approvedPlaylist = this.generateApprovedPlaylist();
+    document.getElementById("approved-requests").innerHTML=approvedPlaylist;
     console.log(this.state.tracks);
+  }
+  generateApprovedPlaylist = () => {
+    const approvedPlaylist = this.state.tracks.map(result => {
+      console.log(result);
+      return  <li>{result.name}</li>
+    });
+    return (
+      <ul>
+        {approvedPlaylist}
+      </ul>
+    );
   }
   render() {
     return (
