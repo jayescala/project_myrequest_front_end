@@ -1,5 +1,9 @@
 import React from 'react'
 
+const heroku = "https://myrequest-app.herokuapp.com";
+const localhost = "http://localhost:9000";
+const activehost = heroku;
+
 const Suggestions = (props) => {
   console.log(this);
   const suggestions = props.results.tracks.items.map(result => {

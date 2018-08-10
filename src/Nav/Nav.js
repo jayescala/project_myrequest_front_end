@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+const heroku = "https://myrequest-app.herokuapp.com";
+const localhost = "http://localhost:9000";
+const activehost = heroku;
 
 class Nav extends Component {
   render(){

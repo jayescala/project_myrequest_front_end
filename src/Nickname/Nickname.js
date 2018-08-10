@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 
+const heroku = "https://myrequest-app.herokuapp.com";
+const localhost = "http://localhost:9000";
+const activehost = heroku;
+
 class Nickname extends Component {
   constructor(){
     super();

@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 
+const heroku = "https://myrequest-app.herokuapp.com";
+const localhost = "http://localhost:9000";
+const activehost = heroku;
+
 class RoomList extends Component {
   constructor() {
     super();
@@ -26,7 +30,7 @@ class RoomList extends Component {
   }
 
   getRooms = async () => {
-    const rooms = await fetch('http://localhost:9000/rooms', {
+    const rooms = await fetch(activehost + '/rooms', {
       credentials: 'include',
       method: 'GET'
     });

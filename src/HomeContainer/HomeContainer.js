@@ -4,6 +4,10 @@ import RoomList from "./RoomList/RoomList.js";
 import CreateRoom from "./CreateRoom/CreateRoom.js";
 import SearchRoom from "./SearchRoom/SearchRoom.js";
 
+const heroku = "https://myrequest-app.herokuapp.com";
+const localhost = "http://localhost:9000";
+const activehost = heroku;
+
 class HomeContainer extends Component {
   constructor(){
     super();
@@ -14,7 +18,7 @@ class HomeContainer extends Component {
   }
   getRooms = async () => {
     try {
-      const data = await fetch("http://localhost:9000/rooms");
+      const data = await fetch(activehost + "/rooms");
       const rooms = data.json();
       return rooms;
     } catch(err) {
@@ -35,7 +39,7 @@ class HomeContainer extends Component {
   addRoom = async (room, event) => {
     event.preventDefault();
     try {
-      await fetch("http://localhost:9000/rooms", {
+      await fetch(activehost + "/rooms", {
         method: "post",
         body: JSON.stringify(room),
         headers: {

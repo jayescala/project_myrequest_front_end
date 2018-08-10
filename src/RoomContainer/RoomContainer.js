@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import Search from "./Search/Search.js";
 import Chat from "./Chat/Chat.js";
 
+const heroku = "https://myrequest-app.herokuapp.com";
+const localhost = "http://localhost:9000";
+const activehost = heroku;
+
 class Room extends Component {
   constructor() {
     super();
@@ -20,7 +24,7 @@ class Room extends Component {
   }
   getRoom = async () => {
     const roomCode = this.getCode();
-    const room = await fetch('https://myrequest-app.herokuapp.com/rooms/' + roomCode, {
+    const room = await fetch(activehost + "/rooms/" + roomCode, {
       credentials: 'include',
       method: 'GET'
     });
@@ -50,7 +54,7 @@ class Room extends Component {
     e.preventDefault();
     console.log('deleteRoom function is being called, this is the id:', id);
     try {
-      const deleteRoom = await fetch('http://localhost:9000/room/' + id, {
+      const deleteRoom = await fetch(activehost + "/room/" + id, {
         method: 'DELETE'
       });
 
@@ -74,7 +78,7 @@ class Room extends Component {
             <Search addTracks={this.addTracks}/>
           </div>
           <div id="playlist-component" className="home-column">
-            <h3>Playlist</h3>
+            <h3>Host</h3>
           </div>
           <div id="chat-component" className="home-column">
             <Chat />

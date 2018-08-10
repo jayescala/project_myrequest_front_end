@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import RoomContainer from '../RoomContainer/Room.js';
 
+const heroku = "https://myrequest-app.herokuapp.com";
+const localhost = "http://localhost:9000";
+const activehost = heroku;
+
 class Playlist extends Component {
   constructor() {
     super();
@@ -12,7 +16,7 @@ class Playlist extends Component {
 
 getApprovedRequest = async () => {
   const getRooms = this.getRoom();
-  const approvedRequest = await fetch('http://localhost:9000/api/v1/rooms/' + getRooms, {
+  const approvedRequest = await fetch(activehost + "/api/v1/rooms/" + getRooms, {
     credentials: '',
     method: 'GET'
   });

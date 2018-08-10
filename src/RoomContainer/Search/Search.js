@@ -1,6 +1,10 @@
 import React, {Component} from "react";
 import Suggestions from "./Suggestions/Suggestions.js";
 
+const heroku = "https://myrequest-app.herokuapp.com";
+const localhost = "http://localhost:9000";
+const activehost = heroku;
+
 class Search extends Component {
   constructor() {
     super();
@@ -12,7 +16,7 @@ class Search extends Component {
   }
   getQuery = async () => {
     const searchInfo = await this.state.query;
-    const Search = await fetch('http://localhost:9000/search/' + searchInfo, {
+    const Search = await fetch(activehost + "/search/" + searchInfo, {
       credentials: "include",
       method: "get"
     });
@@ -29,29 +33,34 @@ class Search extends Component {
     event.preventDefault();
   }
   addTracks = async (track, event) => {
-    this.state.tracks.push(track);
-    const approvedPlaylist = this.generateApprovedPlaylist();
+    console.log(track);
+    let playlist = "<p>" + track + "</p>"
+    document.getElementById("approved-requests").innerHTML+=playlist;
   }
-  generateApprovedPlaylist = () => {
-    const approvedPlaylist = this.state.tracks.map(result => {
-      console.log(result);
-      return  <li>{result}</li>
-    });
-    return (
-      <ul>
-        {approvedPlaylist}
-      </ul>
-    );
-  }
+  // generateApprovedPlaylist = () => {
+  //   const approvedPlaylist = this.state.tracks.map(result => {
+  //     console.log(result);
+  //     return  <li>{result}</li>
+  //   });
+  //   return (
+  //     <ul>
+  //       {approvedPlaylist}
+  //     </ul>
+  //   );
+  // }
+
   render() {
     return (
       <div id="search-component">
-        {this.generateApprovedPlaylist()}
         <h3>Search</h3>
         <form onSubmit={this.handleSubmit}>
           <input type="text" value={this.state.query} onChange={this.handleInputChange} placeholder="search for..." name="query"/>
           <button type="submit">Search</button>
         </form>
+        <h3>Playlist</h3>
+        <div id="approved-requests">
+
+        </div>
         <div id="suggestion-component">
           {this.state.results != "" ? <Suggestions results={this.state.results} addTrack={this.addTracks}/> : null}
         </div>

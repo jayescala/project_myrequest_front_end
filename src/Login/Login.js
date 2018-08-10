@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 
+const heroku = "https://myrequest-app.herokuapp.com";
+const localhost = "http://localhost:9000";
+const activehost = heroku;
+
 class Login extends Component {
   constructor(){
     super();
@@ -10,7 +14,7 @@ class Login extends Component {
   }
   handleSubmit = async (event) => {
     event.preventDefault();
-    const loginResponse = await fetch("http://localhost:9000/user/login", {
+    const loginResponse = await fetch(activehost + "/user/login", {
       method: "post",
       credentials: "include",
       body: JSON.stringify(this.state),

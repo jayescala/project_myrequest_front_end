@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 
+const heroku = "https://myrequest-app.herokuapp.com";
+const localhost = "http://localhost:9000";
+const activehost = heroku;
+
 class SearchRoom extends Component {
   constructor(){
     super();
@@ -9,7 +13,7 @@ class SearchRoom extends Component {
   }
   getRooms = async () => {
     try {
-      const data = await fetch("https://myrequest-app.herokuapp.com/rooms/" + this.state.roomCode);
+      const data = await fetch(activehost + "/rooms/" + this.state.roomCode);
       const room = data.json();
       return room;
     } catch(err) {
